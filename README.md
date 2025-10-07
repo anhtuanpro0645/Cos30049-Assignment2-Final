@@ -13,6 +13,7 @@ hyperparameter optimization, and evaluating multiple models to select the best p
 
 
 ## Project Structure
+```
 Project/
 │
 ├── data/
@@ -30,7 +31,7 @@ Project/
 │
 ├── requirements.txt
 └── README.md
-
+```
 ## Instructions
 Step 1: 
 1. Ensure Python 3.10+ is installed  
