@@ -23,6 +23,7 @@ Project/
 ├── src/
 │ ├── Data_process.ipynb # Data Collection, cleanning and Preprocessing - Explore EDA
 │ └── Train_models.ipynb # Model training, evaluation, and tuning
+│ └── demo.py # Demo to test models 
 │
 ├── models/
 │ ├── TunedLinearSVM.joblib # Final trained model
