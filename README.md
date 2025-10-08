@@ -10,6 +10,7 @@ of the unit **COS30049(Swinburne University)**.
 This project focuses on developing a machine learning model to detect spam emails using text-based features.  
 The process includes data cleaning, preprocessing, TF-IDF feature extraction, training baseline models,  
 hyperparameter optimization, and evaluating multiple models to select the best performer.
+**Final model:** Optuna-tuned Linear SVM (TF-IDF features)
 
 
 ## Project Structure
@@ -34,19 +35,27 @@ Project/
 └── README.md
 ```
 ## Instructions
-Step 1: 
-1. Ensure Python 3.10+ is installed  
-2. Install required libraries:
-```bash
-pip install -r requirements.txt
-```
 
-Step 2:
+### Step 1 — Setup Environment
+1. Ensure **Python 3.10+** is installed  
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate        # On Windows
+   # or
+   source venv/bin/activate     # On macOS/Linux
+   ```
+3. Install required dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+### Step 2:
 1. Open src/Data_process.ipynb
 2. Run all cells 
 3. Output: data/processed/Preprocessed_dataset.csv will be generated automatically
 
-Step 3:
+### Step 3:
 1. Open src/Train_models.ipynb
 2. Run all cells sequentially
 3. The notebook will:
@@ -54,9 +63,10 @@ Step 3:
   - Display evaluation metrics and visualizations
   - Save final model and TF-IDF vectorizer into the models/ folder
 
-Optional:
+### Optional:
 If you want to test the trained model interactively:
 ``` bash 
-python src/demo.py
+cd src
+python demo.py
 ```
 
