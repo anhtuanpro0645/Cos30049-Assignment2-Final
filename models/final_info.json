@@ -2,9 +2,9 @@
   "best_model": "Linear SVM (Optuna tuned)",
   "F1": 0.921,
   "params": {
-    "C": 1.9305875383284887,
-    "loss": "hinge"
+    "C": 3.0410479253455183,
+    "loss": "squared_hinge"
   },
-  "saved_at": "2025-10-08 19:24:19",
+  "saved_at": "2025-10-08 19:42:39",
   "description": "Final tuned Linear SVM model for Email Spam Detection"
 }
