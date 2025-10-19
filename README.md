@@ -34,22 +34,44 @@ Project/
 │     ├── __init__.py
 │     ├── info.py
 │     └── predict.py
+│
 │ └── schemas/
 │     ├── __init__.py
 │     └── request_response.py
+│
 │ └── utils/
 │     ├── __init__.py
 │     └── preprocess.py
+│
 │ └── main.py
 │ └── requirements.txt
 │
 ├── frontend/
 │ ├── pulic/ 
 │ └── src/
-│     ├── api/
-│     ├── assets/
-│     ├── components/
-│     ├── pages/
+│     └── api/
+│         └── api.js
+│
+│     └── assets/
+│         ├── Dark-mode.png
+│         ├── Data_security_24.jpg
+│         ├── Data_security_24.png
+│         ├── Light-mode.png
+│         ├── logo.png
+│         └── react.svg
+│ 
+│     └── components/
+│         ├── DarkToggle.jsx
+│         ├── Footer.jsx
+│         ├── NavigationBar.css
+│         ├── NavigationBar.jsx
+│         └── ResultCard.jsx
+│   
+│     └── pages/
+│         ├── Graphs.jsx
+│         ├── History.jsx
+│         └── Index.jsx
+│ 
 │     ├── App.css
 │     ├── App.jsx
 │     ├── index.css
