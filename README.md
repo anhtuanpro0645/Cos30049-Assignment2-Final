@@ -1,21 +1,59 @@
-# Email Spam Detection using Machine Learning
+# Spamurai — Spam Detection Web App using Machine Learning
+**COS30049 — Full-Stack Web Development for AI Application in Cybersecurity Scenarios**
+Developed by Group 5 — Session 10
 
-This repository contains the implementation for **Assignment 2**  
-of the unit **COS30049(Swinburne University)**.
+Spamurai is a web-based tool that predicts whether a given email or text message is Spam or Ham using a TF-IDF + CalibratedSVM.
+The system demonstrates the integration of AI, backend, and frontend using FastAPI and React.js, with interactive data visualization and responsive UI/UX design.
 
 ---
 
-## Assignment 2 Overview
+## Assignment 3 Overview
+Spamurai allows users to input any message or email, sends it to a FastAPI server that loads a new trained model (CalibratedSVM),
+and returns a prediction along with confidence.
+The results are displayed dynamically on the web interface built with React.js, featuring interactive charts, dark/light mode, and prediction history tracking.
 
-This project focuses on developing a machine learning model to detect spam emails using text-based features.  
-The process includes data cleaning, preprocessing, TF-IDF feature extraction, training baseline models,  
-hyperparameter optimization, and evaluating multiple models to select the best performer.
-**Final model:** Optuna-tuned Linear SVM (TF-IDF features)
-
+## System Architecture
+Frontend (React.js) ──▶ FastAPI Backend ──▶ Machine Learning Model (SVM)
+        ▲                                          │
+        │                                          ▼
+   Chart.js + localStorage          Pretrained TF-IDF + CalibratedSVM.joblib
+- Frontend (React.js + Chart.js + Bootstrap)
+  - Provides UI for user input, prediction, and visualization
+  - Includes dark/light theme and localStorage for prediction history
+- Backend (FastAPI)
+  - Manages RESTful API requests
+  - Loads pre-trained model and vectorizer
+  - Handles input validation, preprocessing, and prediction
+- Machine Learning Model
 
 ## Project Structure
 ```
 Project/
+├── backend/
+│ └── router/
+│     ├── __init__.py
+│     ├── info.py
+│     └── predict.py
+│ └── schemas/
+│     ├── __init__.py
+│     └── request_response.py
+│ └── utils/
+│     ├── __init__.py
+│     └── preprocess.py
+│ └── main.py
+│ └── requirements.txt
+│
+├── frontend/
+│ ├── pulic/ 
+│ └── src/
+│     ├── api/
+│     ├── assets/
+│     ├── components/
+│     ├── pages/
+│     ├── App.css
+│     ├── App.jsx
+│     ├── index.css
+│     └── index.html
 │
 ├── data/
 │ ├── raw/ # Original datasets
@@ -37,7 +75,7 @@ Project/
 ## Instructions
 
 ### Step 1 — Setup Environment
-1. Ensure **Python 3.10+** is installed  
+1. cd backend
 2. Create and activate a virtual environment:
    ```bash
    python -m venv venv
@@ -49,24 +87,51 @@ Project/
   ```bash
   pip install -r requirements.txt
   ```
-
+4. Start FastAPI server:
+  ```bash
+  uvicorn main:app --reload
+  ```
+5. Open your browser and go to:
+  ```bash
+  http://127.0.0.1:8000/docs
+  ```
 ### Step 2:
-1. Open src/Data_process.ipynb
-2. Run all cells 
-3. Output: data/processed/Preprocessed_dataset.csv will be generated automatically
+1. Start new terminatal (Use Ctrl + Shift + ` or click "+")
+2. Move to frontend directory:
+  ```bash
+  cd ../frontend
+  ```
+3. Install required packages
+4. Start the React app:
+  ```bash
+  npm run dev
+  ```
+5. Open your browser:
+  ```bash
+  http://localhost:5173
+  
+  ```
 
-### Step 3:
-1. Open src/Train_models.ipynb
-2. Run all cells sequentially
-3. The notebook will:
-  - Train baseline and tuned models
-  - Display evaluation metrics and visualizations
-  - Save final model and TF-IDF vectorizer into the models/ folder
+## Frontend - Key Features:
+- Built using React.js + Vite
+- Data visualization using Chart.js
+- Responsive UI with Bootstrap 5
+- Custom dark/light mode theme
+- Fully modularized (components, pages, assets separated)
 
-### Optional:
-If you want to test the trained model interactively:
-``` bash 
-cd src
-python demo.py
-```
+## Backend Features
+- Built using FastAPI
+- Organized with routers, schemas, and utilities
+- Loads model and vectorizer with joblib
+- Implements Pydantic validation for request/response
+- Handles text preprocessing (lowercase, punctuation removal, etc.)
+- Returns JSON response with prediction and confidence
+
+## Developed by - Group 5 - Session 10
+| Name                 | Student ID |
+| -------------------- | ---------- |
+| Ngoc Anh Tuan Nguyen | 104814399  |
+| Hung Cao Phan        | 104996307  |
+| Tien Dat Nguyen      | 104473172  |
+
 
