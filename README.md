@@ -157,3 +157,13 @@ Project/
 | Tien Dat Nguyen      | 104473172  |
 
 
+## Image Resources:
+https://www.freepik.com/free-vector/global-data-security-personal-data-security-cyber-data-security-online-concept-illustration-internet-security-information-privacy-protection_12953623.htm#fromView=keyword&page=1&position=0&uuid=b41c9a52-7c87-45c9-952b-15c53d9ea526&query=Cyber+attacks+png 
+
+https://www.onlinewebfonts.com/icon/59405
+
+https://medium.com/lets-make-something-up/creating-light-dark-mode-on-a-react-app-with-context-589a5465f639
+Icon links: https://pngtree.com/element/down?id=OTAzMDA0Mw==&type=1&time=1760862792&token=ZGI4ZDI0YjZjZTljNTQzZjUyNDYyMjFjM2VjMjZiNjg=&t=0 
+
+https://www.onlinewebfonts.com/icon/59405
+
