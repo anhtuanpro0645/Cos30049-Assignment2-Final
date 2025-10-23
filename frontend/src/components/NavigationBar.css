@@ -9,7 +9,7 @@
   padding: 1rem 0;
 }
 
-/* 🌙 Dark mode for navbar only */
+/* Dark mode for navbar only */
 body.dark-mode .custom-navbar {
   background-color: rgba(25, 25, 25, 0.92) !important;
   color: #f5f5f5;

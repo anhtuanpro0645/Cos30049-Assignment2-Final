@@ -123,6 +123,33 @@ body.darkmode .footer {
   color: #000000;
 }
 
+/* ---- ResultCard Dark Mode Contrast Fix ---- */
+body.dark-mode .bg-danger-subtle {
+  background-color: rgba(255, 77, 77, 0.2) !important; 
+  color: #ffb3b3 !important; 
+  border: 1px solid #ff4d4d33;
+}
+
+body.dark-mode .bg-success-subtle {
+  background-color: rgba(77, 255, 136, 0.2) !important; 
+  color: #b3ffcc !important;
+  border: 1px solid #4dff8833;
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text {
+  color: #fff !important;
+}
+
+body.dark-mode .btn-outline-dark {
+  color: #fff;
+  border-color: #888;
+}
+body.dark-mode .btn-outline-dark:hover {
+  background-color: #ff4d4d;
+  border-color: #ff4d4d;
+  color: #fff;
+}
 
 
 /* ===== Theme Toggle Button ===== */
