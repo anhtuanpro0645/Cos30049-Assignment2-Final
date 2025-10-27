@@ -1,33 +1,59 @@
-from fastapi import APIRouter, HTTPException
-from schemas.request_response import PredictRequest, PredictResponse
-from utils.preprocess import clean_text
-import joblib, os
+from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel, Field
+from typing import Optional
 import numpy as np
 
-router = APIRouter(prefix="/api", tags=["predict"])
+# Create router with API prefix and swagger documentation tag
+router = APIRouter(prefix="/api", tags=["Prediction"])
 
-# Load model + vectorizer (lazy load)
-MODEL_PATH = os.path.join("..", "models", "CalibratedSVM.joblib")
-VEC_PATH = os.path.join("..", "models", "vectorizer.joblib")
+# Request validation schema
+class PredictRequest(BaseModel):
+    text: str = Field(
+        ...,  # Required field
+        min_length=3,
+        max_length=5000,
+        example="Win a FREE iPhone now!"
+    )
 
-MODEL = joblib.load(MODEL_PATH)
-VEC = joblib.load(VEC_PATH)
+# Response schema defining the prediction output format
+class PredictResponse(BaseModel):
+    prediction: str     # "Spam" or "Ham"
+    score: float        # Confidence score (0-1)
 
-@router.post("/predict", response_model=PredictResponse)
-def predict(req: PredictRequest):
+#  POST Endpoint
+@router.post("/predict", response_model=PredictResponse, summary="Classify message as Spam or Ham")
+def predict_text(req: PredictRequest, request: Request):
+    """Predict spam or ham using the loaded ML model from app.state"""
+    text = req.text.strip()
+
+    # Validate text
+    if not text:
+        raise HTTPException(status_code=400, detail="Input text cannot be empty.")
+
+    # Load model & vectorizer from FastAPI app state
+    MODEL = getattr(request.app.state, "MODEL", None)
+    VEC = getattr(request.app.state, "VEC", None)
+
+    if MODEL is None or VEC is None:
+        raise HTTPException(status_code=500, detail="Model or vectorizer not loaded. Please restart the API server.")
+
     try:
-        text = clean_text(req.text)
+        # Vectorize input
         X = VEC.transform([text])
 
+        # Predict and get confidence
         if hasattr(MODEL, "predict_proba"):
-            proba = MODEL.predict_proba(X)[0][1]
+            probs = MODEL.predict_proba(X)[0]
+            pred_idx = int(np.argmax(probs))
+            confidence = float(probs[pred_idx])
         else:
-            raw_score = MODEL.decision_function(X)[0]
-            proba = float(1 / (1 + np.exp(-raw_score)))  # sigmoid
+            pred_idx = int(MODEL.predict(X)[0])
+            confidence = 1.0
 
-        y_pred = MODEL.predict(X)[0]
-        label = "Spam" if y_pred == 1 else "Ham"
+        prediction = "Spam" if pred_idx == 1 else "Ham"
 
-        return PredictResponse(prediction=label, score=round(float(proba), 3))
+        return PredictResponse(prediction=prediction, score=round(confidence, 4))
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+

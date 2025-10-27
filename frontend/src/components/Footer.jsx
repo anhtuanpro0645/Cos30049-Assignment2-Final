@@ -1,4 +1,11 @@
+/*
+ * Footer Component
+ * Displays copyright information and team member credits
+ * Used at the bottom of every page in the application
+ */
+
 export default function Footer() {
+  // Render footer with copyright info and team credits
   return (
     <footer className="app-footer py-3 mt-auto">
       <small>

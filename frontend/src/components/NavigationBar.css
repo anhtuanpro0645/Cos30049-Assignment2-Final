@@ -51,7 +51,7 @@ body.dark-mode .custom-nav .nav-link.active {
   color: #111;
 }
 
-/* ===== Link Layout ===== */
+/* Link Layout */
 .custom-nav {
   display: flex;
   justify-content: center;

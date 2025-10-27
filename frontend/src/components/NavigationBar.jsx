@@ -1,17 +1,28 @@
+/*
+ * Navigation Bar Component
+ * Provides site-wide navigation using React Router
+ * Features:
+ * - Responsive design with mobile toggle
+ * - Active link highlighting
+ * - Brand logo and title
+ */
+
 import { Link, useLocation } from "react-router-dom";
 import "./NavigationBar.css";
 
 export default function Navbar() {
+  // Get current route location for active link highlighting
   const location = useLocation();
 
   return (
     <nav className="navbar navbar-expand-lg custom-navbar shadow-sm sticky-top w-100">
       <div className="container-fluid justify-content-center flex-column">
-        {/* === Brand (Logo + Title) === */}
+        {/*Brand (Logo + Title)*/}
         <Link
           className="navbar-brand fw-bold d-flex align-items-center justify-content-center mb-2"
           to="/"
-        >
+        > 
+          {/*Assign Image*/}
           <img
             src="/src/assets/logo.png"
             /* Logo by https://www.onlinewebfonts.com/icon/59405 */
@@ -22,7 +33,7 @@ export default function Navbar() {
           <span className="brand-title">Spamurai</span>
         </Link>
 
-        {/* === Mobile toggle === */}
+        {/*Mobile toggle*/}
         <button
           className="navbar-toggler"
           type="button"
@@ -35,10 +46,11 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* === Nav Links === */}
+        {/*Nav Links*/}
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav custom-nav">
             <li className="nav-item">
+              {/* Home Link */}
               <Link
                 className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
                 to="/"
@@ -47,6 +59,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              {/* History Link */}
               <Link
                 className={`nav-link ${location.pathname === "/history" ? "active" : ""}`}
                 to="/history"
@@ -55,6 +68,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              {/* Graphs Link */}
               <Link
                 className={`nav-link ${location.pathname === "/graphs" ? "active" : ""}`}
                 to="/graphs"

@@ -1,3 +1,12 @@
+/*
+ * Analytics Dashboard Component
+ * Displays three charts visualizing spam detection results:
+ * 1. Pie Chart: Distribution of spam vs ham messages
+ * 2. Bar Chart: Confidence scores for each message
+ * 3. Line Chart: Trend of confidence scores over time
+ */
+
+
 import { Pie, Bar, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,6 +21,7 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
+// Register Chart.js components and plugins
 ChartJS.register(
   ArcElement,
   CategoryScale,
@@ -25,19 +35,21 @@ ChartJS.register(
 );
 
 export default function Graphs() {
+  // Load prediction history from localStorage
   const history = JSON.parse(localStorage.getItem("spamurai_history")) || [];
 
+  // Calculate statistics
   const spamCount = history.filter((h) => h.prediction === "Spam").length;
   const hamCount = history.length - spamCount;
   const total = spamCount + hamCount;
 
-  /* ===== PIE CHART ===== */
+  /* PIE CHART Configuration */
   const pieData = {
     labels: ["Spam", "Ham"],
     datasets: [
       {
         data: [spamCount, hamCount],
-        backgroundColor: ["#f33737ff", "#4ae764ff"],
+        backgroundColor: ["#f33737ff", "#4ae764ff"], // Red for spam, green for ham
       },
     ],
   };
@@ -50,6 +62,7 @@ export default function Graphs() {
       },
       tooltip: {
         callbacks: {
+          // Custom tooltip showing count and percentage
           label: (context) => {
             const label = context.label || "";
             const value = context.raw;
@@ -61,6 +74,7 @@ export default function Graphs() {
       datalabels: {
         color: "#fff",
         font: { weight: "bold", size: 14 },
+        // Show percentage on pie slices
         formatter: (value) => {
           if (total === 0) return "0%";
           return `${((value / total) * 100).toFixed(1)}%`;
@@ -69,14 +83,14 @@ export default function Graphs() {
     },
   };
 
-  /* ===== BAR CHART ===== */
+  /* BAR CHART Configuration */
   const barData = {
     labels: history.map((_, i) => `#${i + 1}`),
     datasets: [
       {
         label: "Spam Confidence (%)",
         data: history.map((h) => h.score * 100),
-        backgroundColor: "#339af0",
+        backgroundColor: "#339af0", // Blue bars
       },
     ],
   };
@@ -92,7 +106,7 @@ export default function Graphs() {
           label: (context) => `${context.raw.toFixed(1)}% confidence`,
         },
       },
-      datalabels: { display: false },
+      datalabels: { display: false }, // Hide data labels on bars
     },
     scales: {
       y: {
@@ -102,7 +116,7 @@ export default function Graphs() {
     },
   };
 
-  /* ===== LINE CHART ===== */
+  /* LINE CHART Configuration */
   const lineData = {
     labels: history.map((_, i) => `#${i + 1}`),
     datasets: [
@@ -110,10 +124,10 @@ export default function Graphs() {
         label: "Confidence Trend (%)",
         data: history.map((h) => h.score * 100),
         borderColor: "#845ef7",
-        backgroundColor: "#845ef7",
+        backgroundColor: "#845ef7", // Purple line
         fill: false,
-        tension: 0.3,
-      },
+        tension: 0.3, // Smooth curve
+      }, 
     ],
   };
 
@@ -128,7 +142,7 @@ export default function Graphs() {
           label: (context) => `${context.raw.toFixed(1)}% confidence`,
         },
       },
-      datalabels: { display: false }, 
+      datalabels: { display: false },   // Hide data labels on line
     },
     scales: {
       y: {

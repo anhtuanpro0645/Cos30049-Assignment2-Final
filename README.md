@@ -124,6 +124,9 @@ Project/
   cd ../frontend
   ```
 3. Install required packages
+  ```bash
+  npm install
+  ```
 4. Start the React app:
   ```bash
   npm run dev
