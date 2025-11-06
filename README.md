@@ -121,7 +121,7 @@ Project/
 1. Start new terminatal (Use Ctrl + Shift + ` or click "+")
 2. Move to frontend directory:
   ```bash
-  cd ../frontend
+  cd frontend
   ```
 3. Install required packages
   ```bash
@@ -151,6 +151,8 @@ Project/
 - Implements Pydantic validation for request/response
 - Handles text preprocessing (lowercase, punctuation removal, etc.)
 - Returns JSON response with prediction and confidence
+
+Ensure the models directory is in the correct relative path (../models) so FastAPI can locate the CalibratedSVM.joblib and vectorizer.joblib
 
 ## Developed by - Group 5 - Session 10
 | Name                 | Student ID |
